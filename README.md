@@ -28,7 +28,7 @@
 
 | 字段名称         | 字段类型 | 字段注释                   |
 | ---------------- | -------- | -------------------------- |
-| id               | int      |                            |
+| id               | Integer  |                            |
 | nickname         | varchar  | 昵称                       |
 | portrait         | longtext | 头像                       |
 | gender           | char     | 性别(Null: 保密/0:女/1:男) |
@@ -43,7 +43,7 @@
 
 | 字段名称       | 字段类型 | 字段注释   |
 | -------------- | -------- | ---------- |
-| user_id        | int |            |
+| user_id        | integer |            |
 | id_crad_name   | varchar | 身份证姓名 |
 | id_crad_number | char | 身份证号码 |
 | create_timestamp | Integer | 创建时间 |
@@ -56,8 +56,8 @@
 
 | 字段名称      | 字段类型 | 字段注释   |
 | ------------- | -------- | ---------- |
-| id            | int |            |
-| user_id       | int |            |
+| id            | integer |            |
+| user_id       | integer |            |
 | country       | varchar | 国家       |
 | province      | varchar | 省份       |
 | city          | varchar | 市         |
@@ -66,7 +66,7 @@
 | contact_name  | varchar | 联系人姓名 |
 | contact_phone | char | 联系人手机 |
 | sort       | Integer | 排序   |
-| is_deleted    | char | 是否删除   |
+| is_deleted    | int(0=否,1=是) | 是否删除   |
 | create_timestamp | Integer | 创建时间 |
 
 ---
@@ -77,7 +77,7 @@
 
 | 字段名称 | 字段类型 | 字段注释 |
 | -------- | -------- | -------- |
-| id       | int |          |
+| id       | integer |          |
 | named    | varchar | 名称     |
 | cover    | longtext | 封面     |
 | sort        | Integer | 排序 |
@@ -90,17 +90,17 @@
 
 | 字段名称         | 字段类型 | 字段注释 |
 | ---------------- | -------- | -------- |
-| id               | int |          |
-| category_id      | int | 分类ID |
+| id               | integer |          |
+| category_id      | integer | 分类ID |
 | title            | vachar | 标题     |
 | covor            | longtext | 封面     |
 | intro            | longtext | 简介     |
-| origin_price     | decimal | 原价     |
-| current_price    | decimal | 现价 |
-| inventory_count | int | 库存  |
+| origin_price     | Integer        | 原价     |
+| current_price    | Integer        | 现价 |
+| inventory_count | integer | 库存  |
 | sort        | Integer | 排序 |
-| is_upload        | char | 是否上架 |
-| is_deleted    | char | 是否删除   |
+| is_upload        | int(0=否,1=是) | 是否上架 |
+| is_deleted    | int(0=否,1=是) | 是否删除   |
 | upload_timestamp | Integer | 上架时间 |
 | create_timestamp | Integer | 创建时间 |
 | last_update_timestamp | Integer | 修改时间 |
@@ -113,9 +113,9 @@
 
 | 字段名称       | 字段类型 | 字段注释 |
 | -------------- | -------- | -------- |
-| commodity_id   | int      | 商品id   |
-| user_id        | int      | 用户id   |
-| number         | int      | 数量     |
+| commodity_id   | integer  | 商品id   |
+| user_id        | integer  | 用户id   |
+| number         | integer  | 数量     |
 | join_timestamp | Integer  | 加入时间 |
 
 ---
@@ -125,11 +125,11 @@
 
 | 字段名称       | 字段类型 | 字段注释 |
 | -------------- | -------- | -------- |
-| id               | int |          |
-| commodity_id   | int | 商品id   |
-| user_id        | int | 用户id   |
-| is_deleted    | char | 是否删除   |
-| join_timestamp | int | 加入时间 |
+| id               | integer |          |
+| commodity_id   | integer | 商品id   |
+| user_id        | integer | 用户id   |
+| is_deleted    | int(0=否,1=是) | 是否删除   |
+| join_timestamp | integer | 加入时间 |
 
 
 
@@ -137,11 +137,11 @@
 
 | 字段名称       | 字段类型 | 字段注释 |
 | ---------------- | -------- | -------- |
-| id               | int |          |
+| id               | integer |          |
 | num | Integer | 类型0:抵扣金额 / 类型1:万分比例(10000 = 100%) |
 | kind | Integer | 类型(0:抵扣卷 / 1:折扣劵) |
 | valid_time | Integer | 有效时间(单位为分钟) |
-| is_deleted    | char | 是否删除   |
+| is_deleted    | int(0=否,1=是) | 是否删除   |
 | create_timestamp | Integer | 创建时间 |
 
 ---
@@ -152,9 +152,9 @@
 
 | 字段名称       | 字段类型 | 字段注释 |
 | ---------------- | -------- | -------- |
-| id               | int |          |
-| user_id |int|用户id|
-| coupon_id |int|用户id|
+| id               | integer |          |
+| user_id |integer|用户id|
+| coupon_id |integer|用户id|
 | is_used|char|是否已使用|
 | join_timestamp | Integer | 加入时间 |
 
@@ -166,15 +166,15 @@
 
 | 字段名称         | 字段类型 | 字段注释 |
 | ---------------- | -------- | -------- |
-| id               | int |          |
-| commodity_id |int|商品id|
-| user_id |int|用户id|
-| address_id |int|地址id|
-| user_coupon_id|int|惠卷id|
-| deal_price|decimal|交易价格|
+| id               | integer |          |
+| commodity_id |integer|商品id|
+| user_id |integer|用户id|
+| address_id |integer|地址id|
+| user_coupon_id|integer|惠卷id|
+| deal                  | Integer        |交易价格|
 | logistics_number|string|物流号码|
 | status|Integer|状态|
-| is_deleted    | char | 是否删除   |
+| is_deleted    | int(0=否,1=是) | 是否删除   |
 | create_timestamp | Integer | 创建时间 |
 | last_update_timestamp | Integer | 修改时间 |
 
@@ -186,13 +186,13 @@
 
 | 字段名称         | 字段类型 | 字段注释 |
 | ---------------- | -------- | -------- |
-| id               | int |          |
-| commodity_id |int|商品id|
-| user_id |int|用户id|
+| id               | integer |          |
+| commodity_id |integer|商品id|
+| user_id |integer|用户id|
 | content|string|内容|
-|is_anonymity|char|是否匿名|
-| is_show|char|是否显示|
-| is_deleted    | char | 是否删除   |
+|is_anonymity| int(0=否,1=是) |是否匿名|
+| is_show| int(0=否,1=是) |是否显示|
+| is_deleted    | int(0=否,1=是) | 是否删除   |
 | create_timestamp | Integer | 创建时间 |
 
 ---
@@ -203,11 +203,11 @@
 
 | 字段名称         | 字段类型 | 字段注释 |
 | ---------------- | -------- | -------- |
-| id               | int |          |
-| commodity_id |int|商品id|
+| id               | integer |          |
+| commodity_id |integer|商品id|
 | full_cover |longtext|封面|
 | sort        | Integer | 排序 |
-| is_deleted    | char | 是否删除   |
+| is_deleted    | int(0=否,1=是) | 是否删除   |
 | create_timestamp | Integer | 创建时间 |
 
 ---
@@ -218,9 +218,9 @@
 
 | 字段名称         | 字段类型 | 字段注释 |
 | ---------------- | -------- | -------- |
-| id               | int |          |
-| commodity_id |int|商品id|
-| user_id |int|用户id|
+| id               | integer |          |
+| commodity_id |integer|商品id|
+| user_id |integer|用户id|
 | join_timestamp | Integer | 加入时间 |
 
 ---
