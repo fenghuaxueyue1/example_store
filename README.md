@@ -1932,9 +1932,12 @@ Example
 
 ## 第三方库
 
-[邮件](https://github.com/kootenpv/yagmail)
-[邮件账户设置](https://www.google.com/settings/security/lesssecureapps)
+---
 
-[头像生成](http://cn.gravatar.org/)需要配置代理
+### 邮箱SMTP
+> https://github.com/kootenpv/yagmail
+
+---
+
 
 
