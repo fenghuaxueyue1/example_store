@@ -231,7 +231,171 @@
 ### 建表SQL
 
 ```sql
+-- 创建名为db_example_store的数据库
 CREATE DATABASE IF NOT EXISTS db_example_store;
+
+-- 展示现有的数据库,查看是否创建成功
+SHOW DATABASES; 
+
+-- 创建一个tb_user 用户表
+CREATE TABLE IF NOT EXISTS tb_user (
+											id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+											nickname VARCHAR(20)  COMMENT'昵称',
+											portrait LONGTEXT COMMENT'头像',
+											gender CHAR(2) DEFAULT'保密' NOT NULL COMMENT'性别',
+											email VARCHAR(50) COMMENT'邮箱',
+											create_timestamp INTEGER COMMENT'创建时间'
+);
+
+-- 创建一个tb_identity 身份表
+CREATE TABLE IF NOT EXISTS tb_identity (
+													user_id INTEGER UNSIGNED,
+													id_crad_name VARCHAR(20) COMMENT'身份证姓名',
+													id_crad_number CHAR(18) COMMENT'身份证号码',
+													create_timestamp INTEGER COMMENT'创建时间',
+constraint fk_user_identity foreign key (user_id) references tb_user(id)
+);
+
+-- 创建一个tb_address 地址表
+CREATE TABLE IF NOT EXISTS tb_address(
+												id INTEGER UNSIGNED PRIMARY KEY,
+												user_id INTEGER UNSIGNED,
+												country VARCHAR(20) COMMENT'国家',
+												province VARCHAR(30) COMMENT'省份',
+												city VARCHAR(30) COMMENT'市',
+												county VARCHAR(30) COMMENT'县',
+												detailed VARCHAR(50) COMMENT'详细地址',
+												contact_name VARCHAR(20) COMMENT'联系人姓名',
+												contatc_phone char(11) COMMENT'联系人电话',
+												sort INTEGER COMMENT'排序',
+												is_deleted INT NOT NULL DEFAULT'0' COMMENT '是否删除',
+												create_timestamp INTEGER COMMENT'创建时间',
+CONSTRAINT fk_user_address FOREIGN KEY (user_id) REFERENCES tb_user(id)
+);
+
+-- 创建一个tb_category分类表
+CREATE TABLE IF NOT EXISTS tb_category(
+												 id INTEGER UNSIGNED PRIMARY KEY,
+												 named VARCHAR(30) COMMENT'名称',
+												 cover LONGTEXT COMMENT'封面',
+												 sort INTEGER COMMENT'排序'
+);
+
+-- 创建一个tb_commodity商品表
+CREATE TABLE IF NOT EXISTS tb_commodity(
+													id INTEGER UNSIGNED PRIMARY KEY,
+													category_id INTEGER UNSIGNED COMMENT'分类标题',
+													title VARCHAR(30) COMMENT'标题',
+													covor INTEGER COMMENT'封面',
+													intro LONGTEXT COMMENT'简介',
+													origin_price INTEGER COMMENT'原价',
+													current_price INTEGER COMMENT'现价',
+													inventory_count INTEGER COMMENT'库存',
+													sort INTEGER COMMENT'排序',
+													is_uplad INT NOT NULL DEFAULT'0' COMMENT'是否上架',
+													is_delete INT NOT NULL DEFAULT'0' COMMENT'是否删除',
+													upload_timestamp INTEGER COMMENT'上架时间',
+													create_timestamp INTEGER COMMENT'创建时间',
+													last_update_timestamp INTEGER COMMENT'修改时间',
+CONSTRAINT fk_category_commodity FOREIGN KEY (category_id) REFERENCES tb_category(id)
+);
+
+-- 创建一个tb_shopping选购表
+CREATE TABLE IF NOT EXISTS tb_shopping (
+													id INTEGER UNSIGNED PRIMARY KEY,
+													commodidy_id INTEGER UNSIGNED COMMENT'商品id',
+													user_id INTEGER UNSIGNED COMMENT'用户id',
+													number INTEGER COMMENT'数量',
+													join_timestamp INTEGER COMMENT'加入时间',
+CONSTRAINT fk_user_shopping FOREIGN KEY (user_id) REFERENCES tb_user(id),
+CONSTRAINT fk_commodity_shopping FOREIGN KEY (commodidy_id) REFERENCES tb_commodity(id)
+);
+
+-- 创建一个tb_favorite收藏表
+CREATE TABLE IF NOT EXISTS tb_favorite(
+												 id INTEGER UNSIGNED PRIMARY KEY,
+												 commodity_id INTEGER UNSIGNED COMMENT'商品id',
+												 user_id INTEGER UNSIGNED COMMENT'用户id',
+												 is_deleted INT NOT NULL DEFAULT'0' COMMENT'是否删除',
+												 join_timestamp INTEGER COMMENT'加入时间',
+CONSTRAINT fk_commodity_favorite FOREIGN KEY (commodity_id) REFERENCES tb_commodity(id),
+CONSTRAINT fk_user_favorite FOREIGN KEY (user_id) REFERENCES tb_user(id) 										 
+);
+
+-- 创建一个tb_coupon惠卷表
+CREATE TABLE IF NOT EXISTS tb_coupon(
+											 id INTEGER UNSIGNED PRIMARY KEY,
+											 num INTEGER COMMENT'类型0:抵扣金额 / 类型1:万分比例(10000 = 100%)',
+											 kind INTEGER COMMENT'类型(0:抵扣卷 / 1:折扣劵)',
+											 valid_time INTEGER COMMENT'有效时间(单位为分钟)',
+											 is_deleted INTEGER COMMENT'是否删除',
+											 create_timestamp INTEGER COMMENT'创建时间'
+);
+
+-- 创建一个tb_user_coupon用户惠卷表
+CREATE TABLE IF NOT EXISTS tb_user_coupon(
+														id INTEGER UNSIGNED PRIMARY KEY,
+														user_id INTEGER UNSIGNED COMMENT'用户id',
+														coupon_id INTEGER UNSIGNED COMMENT'惠卷id',
+														is_used INTEGER COMMENT'是否已使用',
+														join_timestamp INTEGER COMMENT'加入时间',
+CONSTRAINT fk_user_user_coupon FOREIGN KEY (user_id) REFERENCES	tb_user(id),
+CONSTRAINT fk_coupon_user_coupon FOREIGN KEY (coupon_id) REFERENCES tb_coupon(id)
+);
+
+-- 创建一个tb_order订单表
+CREATE TABLE IF NOT EXISTS tb_order(
+											id INTEGER UNSIGNED PRIMARY KEY,
+											commodity_id INTEGER UNSIGNED COMMENT'商品id',
+											user_id INTEGER UNSIGNED COMMENT'用户id',
+											address_id INTEGER UNSIGNED COMMENT'地址id',
+											user_coupon_id INTEGER UNSIGNED COMMENT'惠卷id',
+											deal INTEGER COMMENT'交易价格',
+											logistics_number CHAR(15) COMMENT'物流号码',
+											stat INTEGER COMMENT'状态',
+											is_deleted INT NOT NULL DEFAULT'0' COMMENT'是否删除',
+											create_timestamp INTEGER COMMENT'创建时间',
+											last_update_timestamp INTEGER COMMENT'修改时间',
+CONSTRAINT fk_commodity_order FOREIGN KEY (commodity_id) REFERENCES tb_commodity(id),
+CONSTRAINT fk_user_order FOREIGN KEY (user_id) REFERENCES tb_user(id), 
+CONSTRAINT fk_address_order FOREIGN KEY (address_id) REFERENCES tb_address(id),
+CONSTRAINT fk_user_coupon_order FOREIGN KEY (user_coupon_id) REFERENCES tb_user_coupon(id)
+);
+
+-- 创建一个tb_comment评论表
+CREATE TABLE IF NOT EXISTS tb_comment(
+												id INTEGER UNSIGNED PRIMARY KEY,
+												commodity_id INTEGER UNSIGNED UNSIGNED COMMENT'商品id',
+												user_id INTEGER UNSIGNED COMMENT'用户id',
+												content VARCHAR(100) COMMENT'内容',
+												is_anonymity INT NOT NULL DEFAULT'0' COMMENT'是否匿名',
+												is_show INT NOT NULL DEFAULT'0' COMMENT'是否显示',
+												is_deleted INT NOT NULL DEFAULT'0' COMMENT'是否删除',
+												create_timestamp INTEGER COMMENT'创建时间',
+CONSTRAINT fk_commodity_comment FOREIGN KEY (commodity_id) REFERENCES tb_commodity(id),
+CONSTRAINT fk_user_comment FOREIGN KEY (user_id) REFERENCES tb_user(id)
+);
+
+-- 创建一个tb_banner横幅表
+CREATE TABLE IF NOT EXISTS tb_banner (
+												id INTEGER UNSIGNED PRIMARY KEY,
+												commodity_id INTEGER UNSIGNED COMMENT'商品id',
+												full_cover LONGTEXT COMMENT'封面',
+												sort INTEGER COMMENT'排序',
+												is_deleted INT NOT NULL DEFAULT'0' COMMENT'是否删除',
+												create_timestamp INTEGER COMMENT'创建时间',
+CONSTRAINT fk_commodity_banner FOREIGN KEY (commodity_id) REFERENCES tb_commodity(id)
+);
+
+-- 创建一个tb_track足迹表
+CREATE TABLE IF NOT EXISTS tb_track(
+											id INTEGER UNSIGNED PRIMARY KEY,
+											commodity_id INTEGER UNSIGNED COMMENT'商品id',
+											user_id INTEGER UNSIGNED COMMENT'用户id',
+											join_timestamp INTEGER COMMENT'加入时间',
+CONSTRAINT fk_commodity_track FOREIGN KEY (commodity_id) REFERENCES tb_commodity(id),
+CONSTRAINT fk_user_track FOREIGN KEY (user_id) REFERENCES tb_user(id)
+);CREATE DATABASE IF NOT EXISTS db_example_store;
 
 -- 展示现有的数据库,查看是否创建成功
 SHOW DATABASES; 
@@ -388,7 +552,7 @@ CONSTRAINT fk_commodity_banner FOREIGN KEY (commodity_id) REFERENCES tb_commodit
 
 -- 创建一个tb_track足迹表
 CREATE TABLE IF NOT EXISTS tb_track(
-											id INTEGER UNSIGNED,
+											id INTEGER UNSIGNED PRIMARY KEY,
 											commodity_id INTEGER UNSIGNED COMMENT'商品id',
 											user_id INTEGER UNSIGNED COMMENT'用户id',
 											join_timestamp INTEGER COMMENT'加入时间',
