@@ -80,7 +80,7 @@
 | id               | integer |          |
 | category_id      | integer | 分类ID |
 | title            | vachar | 标题     |
-| covor            | longtext | 封面     |
+| cover          | longtext | 封面     |
 | intro            | longtext | 简介     |
 | origin_price     | Integer        | 原价     |
 | current_price    | Integer        | 现价 |
@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS tb_address(
 												county VARCHAR(30) COMMENT'县',
 												detailed VARCHAR(50) COMMENT'详细地址',
 												contact_name VARCHAR(20) COMMENT'联系人姓名',
-												contatc_phone char(11) COMMENT'联系人电话',
+												contact_phone char(11) COMMENT'联系人电话',
 												sort INTEGER COMMENT'排序',
 												is_deleted INT NOT NULL DEFAULT'0' COMMENT '是否删除',
 												create_timestamp INTEGER COMMENT'创建时间',
@@ -265,13 +265,13 @@ CREATE TABLE IF NOT EXISTS tb_commodity(
 													id INTEGER UNSIGNED PRIMARY KEY,
 													category_id INTEGER UNSIGNED COMMENT'分类标题',
 													title VARCHAR(30) COMMENT'标题',
-													covor INTEGER COMMENT'封面',
+													cover INTEGER COMMENT'封面',
 													intro LONGTEXT COMMENT'简介',
 													origin_price INTEGER COMMENT'原价',
 													current_price INTEGER COMMENT'现价',
 													inventory_count INTEGER COMMENT'库存',
 													sort INTEGER COMMENT'排序',
-													is_uplad INT NOT NULL DEFAULT'0' COMMENT'是否上架',
+													is_upload INT NOT NULL DEFAULT'0' COMMENT'是否上架',
 													is_delete INT NOT NULL DEFAULT'0' COMMENT'是否删除',
 													upload_timestamp INTEGER COMMENT'上架时间',
 													create_timestamp INTEGER COMMENT'创建时间',
@@ -282,12 +282,12 @@ CONSTRAINT fk_category_commodity FOREIGN KEY (category_id) REFERENCES tb_categor
 -- 创建一个tb_shopping选购表
 CREATE TABLE IF NOT EXISTS tb_shopping (
 													id INTEGER UNSIGNED PRIMARY KEY,
-													commodidy_id INTEGER UNSIGNED COMMENT'商品id',
+													commodity_id INTEGER UNSIGNED COMMENT'商品id',
 													user_id INTEGER UNSIGNED COMMENT'用户id',
 													number INTEGER COMMENT'数量',
 													join_timestamp INTEGER COMMENT'加入时间',
 CONSTRAINT fk_user_shopping FOREIGN KEY (user_id) REFERENCES tb_user(id),
-CONSTRAINT fk_commodity_shopping FOREIGN KEY (commodidy_id) REFERENCES tb_commodity(id)
+CONSTRAINT fk_commodity_shopping FOREIGN KEY (commodity_id) REFERENCES tb_commodity(id)
 );
 
 -- 创建一个tb_favorite收藏表
