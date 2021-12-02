@@ -31,7 +31,7 @@
 | id               | Integer  |                            |
 | nickname         | varchar  | 昵称                       |
 | portrait         | longtext | 头像                       |
-| gender           | char     | 性别(Null: 保密/0:女/1:男) |
+| gender           | integer  | 性别(Null: 保密/0:女/1:男) |
 | email            | varchar  | 邮箱                       |
 | create_timestamp | Integer  | 创建时间                   |
 
@@ -111,12 +111,13 @@
 
 ### 选购表 tb_shopping
 
-| 字段名称       | 字段类型 | 字段注释 |
-| -------------- | -------- | -------- |
-| commodity_id   | integer  | 商品id   |
-| user_id        | integer  | 用户id   |
-| number         | integer  | 数量     |
-| join_timestamp | Integer  | 加入时间 |
+| 字段名称       | 字段类型 | 字段注释 |      |
+| -------------- | -------- | -------- | ---- |
+| id             | integer  |          |      |
+| commodity_id   | integer  | 商品id   |      |
+| user_id        | integer  | 用户id   |      |
+| number         | integer  | 数量     |      |
+| join_timestamp | Integer  | 加入时间 |      |
 
 ---
 
@@ -154,8 +155,8 @@
 | ---------------- | -------- | -------- |
 | id               | integer |          |
 | user_id |integer|用户id|
-| coupon_id |integer|用户id|
-| is_used|char|是否已使用|
+| coupon_id |integer|惠卷id|
+| is_used|integer|是否已使用|
 | join_timestamp | Integer | 加入时间 |
 
 ---
@@ -172,8 +173,8 @@
 | address_id |integer|地址id|
 | user_coupon_id|integer|惠卷id|
 | deal                  | Integer        |交易价格|
-| logistics_number|string|物流号码|
-| status|Integer|状态|
+| logistics_number | varchar        |物流号码|
+| state |Integer|状态|
 | is_deleted    | int(0=否,1=是) | 是否删除   |
 | create_timestamp | Integer | 创建时间 |
 | last_update_timestamp | Integer | 修改时间 |
