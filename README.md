@@ -2106,12 +2106,6 @@ Example
 
 ## 第三方库
 
----
+[flask-sqlalchemy](http://www.pythondoc.com/flask-sqlalchemy/index.html)
 
-### 邮箱SMTP
-> https://github.com/kootenpv/yagmail
-
----
-
-
-
+[yagmail](https://github.com/kootenpv/yagmail)
