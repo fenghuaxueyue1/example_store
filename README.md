@@ -393,15 +393,17 @@ CONSTRAINT fk_user_track FOREIGN KEY (user_id) REFERENCES tb_user(id)
 
 > 
 
-Path: ``````
+Path: ```/user/register/verify```
 
-Method: ``````
+- ```/user/register/verify?email=xxx@xxx.com```
+
+Method: ```GET```
 
 Request
 
 | 参数名称 | 参数类型 | 参数简介 | 是否必传 |
 | -------- | -------- | -------- | :------- |
-|          |          |          |          |
+| email    |          |          | y        |
 
 
 
@@ -423,23 +425,26 @@ Example
 
 ---
 
-#### 用户注册-验证验证短信
+#### 用户注册-校验验证短信
 
 > 
 
-Path: ``````
+Path: ```/user/register/verify```
 
-Method: ``````
+Method: ```POST```
 
 Request
 
-| 参数名称 | 参数类型 | 参数简介 | 是否必传 |
-| -------- | -------- | -------- | :------- |
-|          |          |          |          |
+| 参数名称    | 参数类型 | 参数简介 | 是否必传 |
+| ----------- | -------- | -------- | :------- |
+| email       |          |          | y        |
+| verify_code |          |          | y        |
 
 
 
 Response
+
+- Set-Cookie: {"tk": "xxxx"}
 
 | 参数名称 | 参数类型 | 参数简介 | 是否必传 |
 | -------- | -------- | -------- | :------- |
@@ -449,7 +454,7 @@ Response
 
 Example
 
-```
+```json
 
 ```
 
@@ -491,7 +496,7 @@ Example
 
 ---
 
-#### 用户登陆-申请验证短信
+#### 用户登陆-校验验证短信
 
 > 
 

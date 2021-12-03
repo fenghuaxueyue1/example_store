@@ -3,7 +3,7 @@ import random
 
 
 from flask import Blueprint
-from flask import request, jsonify
+from flask import request, jsonify, make_response
 
 from app.model import tb_user
 from app.utils.email import smtp
@@ -11,7 +11,9 @@ from app.utils.email import smtp
 
 bp_user = Blueprint('user', __name__, url_prefix='/user')
 
+user_token = {}
 register_verify_code_store = {}
+login_verify_code_store = {}
 
 
 @bp_user.route("/register/verify", methods=["GET", "POST"])
@@ -49,6 +51,11 @@ def user_register_verify():
             register_verify_code_store.pop(email)
             tb_user.create_user(email)
             user_info = tb_user.get_user_info(None, email)
-            return jsonify(user_info), 200
+            tk = "".join(str(i) for i in [random.randrange(0, 9) for _ in range(12)])
+            user_token[tk] = user_info["id"]
+
+            resp = jsonify(user_info)
+            resp.set_cookie(key="tk", value=tk)
+            return resp, 200
 
         return jsonify(), 400
