@@ -229,7 +229,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
 											id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 											nickname VARCHAR(20)  COMMENT'昵称',
 											portrait LONGTEXT COMMENT'头像',
-											gender CHAR(2) DEFAULT'保密' NOT NULL COMMENT'性别',
+											gender INTEGER(2) DEFAULT'保密' NOT NULL COMMENT'性别',
 											email VARCHAR(50) COMMENT'邮箱',
 											create_timestamp INTEGER COMMENT'创建时间'
 );
