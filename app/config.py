@@ -7,5 +7,5 @@ class Config(object):
 
     # https://www.jianshu.com/p/f7ba338016b8/
     SQLALCHEMY_ECHO = DEBUG
-    SQLALCHEMY_DATABASE_URI = "mysql://root:123456@192.168.0.195/db_example_store?charset=utf-8"
+    SQLALCHEMY_DATABASE_URI = "mysql://root:123456@192.168.0.195/db_example_store?charset=utf8"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
