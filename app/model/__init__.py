@@ -1,1 +1,7 @@
-# flask-sqlacodegen "mysql://root:123456@192.168.0.195/db_example_store" --outfile "./app/model/model.py" --flask
+import pymysql
+
+from app.config import Config
+
+db = pymysql.connect(
+    user=Config.DB_USER, password=Config.DB_PSWD, host=Config.DB_HOST, port=Config.DB_PORT, database=Config.DB_NAME
+)
