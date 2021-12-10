@@ -6,7 +6,7 @@
 |v_0.1|数据库初始设计|2021/11/24 13:00:00|
 ||接口框架设计|2021/11/25 00:30:00|
 ||tb_user.phone改为email|2021/11/25 12:30:00|
-||||
+||更新用户相关接口文档|2021/12/12  00:00:00|
 ||||
 
 
@@ -466,15 +466,15 @@ Example
 
 > 
 
-Path: ``````
+Path: ```/user/login/verify```
 
-Method: ``````
+Method: ```GET```
 
 Request
 
 | 参数名称 | 参数类型 | 参数简介 | 是否必传 |
 | -------- | -------- | -------- | :------- |
-|          |          |          |          |
+| email    |          |          | y        |
 
 
 
@@ -500,9 +500,44 @@ Example
 
 > 
 
-Path: ``````
+Path: ```/user/login/verify```
 
-Method: ``````
+Method: ```POST```
+
+Request
+
+| 参数名称    | 参数类型 | 参数简介 | 是否必传 |
+| ----------- | -------- | -------- | :------- |
+| email       |          |          | y        |
+| verify_code |          |          | y        |
+
+
+
+Response
+
+- Set-Cookie: {"tk": "xxxx"}
+
+| 参数名称 | 参数类型 | 参数简介 | 是否必传 |
+| -------- | -------- | -------- | :------- |
+|          |          |          |          |
+
+
+
+Example
+
+```
+
+```
+
+---
+
+#### 用户信息-获取
+
+> 
+
+Path: ```/user/info```
+
+Method: ```GET```
 
 Request
 
@@ -534,15 +569,15 @@ Example
 
 > 
 
-Path: ``````
+Path: ```/user/info/nickname```
 
-Method: ``````
+Method: ```PUT```
 
 Request
 
-| 参数名称 | 参数类型 | 参数简介 | 是否必传 |
-| -------- | -------- | -------- | :------- |
-|          |          |          |          |
+| 参数名称     | 参数类型 | 参数简介 | 是否必传 |
+| ------------ | -------- | -------- | :------- |
+| new_nickname |          |          | y        |
 
 
 
@@ -568,15 +603,15 @@ Example
 
 > 
 
-Path: ``````
+Path: ```/user/info/portrait```
 
-Method: ``````
+Method: ```PUT```
 
 Request
 
-| 参数名称 | 参数类型 | 参数简介 | 是否必传 |
-| -------- | -------- | -------- | :------- |
-|          |          |          |          |
+| 参数名称     | 参数类型 | 参数简介 | 是否必传 |
+| ------------ | -------- | -------- | :------- |
+| new_portrait | file     |          | y        |
 
 
 
@@ -602,15 +637,15 @@ Example
 
 > 
 
-Path: ``````
+Path: ```/user/info/gender```
 
-Method: ``````
+Method: ```PUT```
 
 Request
 
-| 参数名称 | 参数类型 | 参数简介 | 是否必传 |
-| -------- | -------- | -------- | :------- |
-|          |          |          |          |
+| 参数名称   | 参数类型 | 参数简介 | 是否必传 |
+| ---------- | -------- | -------- | :------- |
+| new_gender |          |          | y        |
 
 
 
@@ -636,9 +671,9 @@ Example
 
 > 
 
-Path: ``````
+Path: ```/user/address```
 
-Method: ``````
+Method: ```POST```
 
 Request
 
@@ -670,9 +705,9 @@ Example
 
 > 
 
-Path: ``````
+Path: ```/user/address```
 
-Method: ``````
+Method: ```PUT```
 
 Request
 
@@ -704,9 +739,9 @@ Example
 
 > 
 
-Path: ``````
+Path: ```/user/address```
 
-Method: ``````
+Method: ```DELETE```
 
 Request
 
@@ -738,9 +773,9 @@ Example
 
 > 
 
-Path: ``````
+Path: ```/banner```
 
-Method: ``````
+Method: ```GET```
 
 Request
 
@@ -772,9 +807,9 @@ Example
 
 > 
 
-Path: ``````
+Path: ```/kinds```
 
-Method: ``````
+Method: ```GET```
 
 Request
 

@@ -4,13 +4,8 @@ from app.config import Config
 app = create_app(Config)
 
 
-@app.route("/")
-def index():
-    return "ok"
-
-
 def main():
-    app.run()
+    app.run(host=Config.SERVER_HOST, port=Config.SERVER_PORT)
 
 
 if __name__ == "__main__":

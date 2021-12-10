@@ -11,8 +11,11 @@ from app.utils.email import smtp
 
 bp_user = Blueprint('user', __name__, url_prefix='/user')
 
+# 用户TOKEN存储
 user_token = {}
+# 用户注册验证码存储
 register_verify_code_store = {}
+# 用户登陆验证码存储
 login_verify_code_store = {}
 
 
@@ -20,7 +23,6 @@ login_verify_code_store = {}
 def user_register_verify():
 
     if request.method == "GET":
-
         email = str(request.args.get("email"))
         if not email:
             return jsonify(), 400
@@ -59,3 +61,46 @@ def user_register_verify():
             return resp, 200
 
         return jsonify(), 400
+
+
+@bp_user.route("/login/verify", methods=["GET", "POST"])
+def user_login_verify():
+    if request.method == "GET":
+        pass
+
+    if request.method == "POST":
+        pass
+
+
+@bp_user.route("/info", methods=["GET"])
+def user_info():
+    if request.method == "GET":
+        pass
+
+
+@bp_user.route("/info/<path:subpath>", methods=["GET"])
+def user_info_change(subpath):
+    
+    if request.method != "PUT":
+        return jsonify(), 400
+
+    if  subpath == "nickname":
+        pass
+    
+    if  subpath == "portrait":
+        pass
+
+    if  subpath == "gender":
+        pass
+
+
+@bp_user.route("/address", methods=["GET", "POST", "PUT"])
+def user_address():
+    if request.method == "GET":
+        pass
+
+    if request.method == "POST":
+        pass
+
+    if request.method == "PUT":
+        pass
