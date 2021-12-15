@@ -12,7 +12,7 @@ class Config(object):
     # db
     DB_USER = "root"
     DB_PSWD = "123456"
-    DB_HOST = "192.168.0.195"
+    DB_HOST = "192.168.0.197"
     DB_PORT = 3306
     DB_NAME = "db_example_store"
 

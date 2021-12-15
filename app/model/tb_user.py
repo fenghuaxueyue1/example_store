@@ -48,3 +48,24 @@ def get_user_info(user_id: int, email: str) -> dict:
     ret.pop("email")
     cursor.close()
     return ret
+
+
+def update_user_nickname(user_id: int, new_nickname: str):
+    cursor = db.cursor()
+    sql = f"UPDATE tb_user SET nickname='{new_nickname}' WHERE id = '{user_id}'"
+    cursor.execute(sql)
+    db.commit()
+
+
+def update_user_portrait(user_id: int, new_portrait: str):
+    cursor = db.cursor()
+    sql = f"UPDATE tb_user SET portrait='{new_portrait}' WHERE id = '{user_id}'"
+    cursor.execute(sql)
+    db.commit()
+
+
+def update_user_gender(user_id: int, new_gender: int):
+    cursor = db.cursor()
+    sql = f"UPDATE tb_user SET gender='{new_gender}' WHERE id = '{user_id}'"
+    cursor.execute(sql)
+    db.commit()
